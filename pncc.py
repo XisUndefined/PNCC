@@ -2,6 +2,7 @@ from librosa.core import stft
 from librosa import filters
 from librosa import to_mono
 import numpy as np
+from scipy.fftpack import dct
 
 import scipy
 
@@ -140,7 +141,7 @@ def pncc(audio_wave, n_fft=512, sr=16000, winlen=0.020, winstep=0.010,
 
     power_law_nonlinearity = power_function_nonlinearity(normalized_power)
 
-    dct = np.dot(power_law_nonlinearity, filters.dct(
-        n_pncc, power_law_nonlinearity.shape[1]).T)
+    dct = np.dot(power_law_nonlinearity, dct(
+        power_law_nonlinearity.shape[1], 3, n_pncc).T)
 
     return dct
