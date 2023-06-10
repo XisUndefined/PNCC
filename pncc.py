@@ -108,7 +108,7 @@ def pncc(audio_wave, n_fft=512, sr=16000, winlen=0.020, winstep=0.010,
                                            window=np.ones(int(sr * winlen)),
                                            center=False)) ** power
 
-    mel_filter = np.abs(filters.mel(sr, n_fft=n_fft, n_mels=n_mels)) ** power
+    mel_filter = np.abs(filters.mel(sr=sr, n_fft=n_fft, n_mels=n_mels)) ** power
     power_stft_signal = np.dot(stft_pre_emphasis_signal.T, mel_filter.T)
 
     medium_time_power = medium_time_power_calculation(power_stft_signal)
